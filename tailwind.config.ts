@@ -1,4 +1,14 @@
 import type { Config } from "tailwindcss";
+import {
+  ACCENT,
+  BLACK,
+  DESTRUCTIVE,
+  MUTED,
+  PRIMARY,
+  SECONDARY,
+  ORANGE,
+  BLEU_FONCE,
+} from "./src/shared/constants/Color";
 import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
@@ -25,6 +35,55 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        pme: {
+          primary: PRIMARY,
+          secondary: SECONDARY,
+          fonce: BLEU_FONCE,
+          green: "#027f3b",
+          orange: "#ed704d",
+          light: "#F1F5F9",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        fonce: {
+          DEFAULT: "hsl(var(--fonce))",
+          foreground: "hsl(var(--fonce-foreground))",
+        },
+        orange: {
+          DEFAULT: "hsl(var(--orange))",
+          foreground: "hsl(var(--orange-foreground))",
+        },
+        // black: {
+        //   DEFAULT: BLACK,
+        //   foreground: "#FFFFFF",
+        // },
+
+        // primary: {
+        //   DEFAULT: PRIMARY,
+        //   foreground: "#FFFFFF",
+        // },
+        // secondary: {
+        //   DEFAULT: SECONDARY,
+        //   foreground: "#1A202C",
+        // },
+        destructive: {
+          DEFAULT: DESTRUCTIVE,
+          foreground: "#FFFFFF",
+        },
+        muted: {
+          DEFAULT: MUTED,
+          foreground: "#64748B",
+        },
+        accent: {
+          DEFAULT: ACCENT,
+          foreground: "#1A202C",
+        },
       },
       keyframes: {
         "fade-in": {
