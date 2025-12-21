@@ -1,6 +1,12 @@
 import { AdminRoutesNavigations } from "@/shared/constants/AppRoutesNavigation";
 import { Navigation } from "@toolpad/core/AppProvider";
-import { CircleDollarSign, Dock, LayoutDashboard } from "lucide-react";
+import {
+  LayoutDashboard,
+  FileText,
+  Package,
+  Users,
+  TrendingDown,
+} from "lucide-react";
 
 export const ADMIN_NAVIGATION: Navigation = [
   {
@@ -16,18 +22,23 @@ export const ADMIN_NAVIGATION: Navigation = [
     kind: "divider",
   },
   {
-    segment: AdminRoutesNavigations.INVOICE,
-    title: "Factures",
-    icon: <CircleDollarSign />,
+    segment: AdminRoutesNavigations.INVOICES,
+    title: "Facturation",
+    icon: <FileText />,
   },
   {
-    segment: AdminRoutesNavigations.INVENTORY,
-    title: "Inventaire",
-    icon: <Dock />,
+    segment: AdminRoutesNavigations.STOCK,
+    title: "Stock",
+    icon: <Package />,
+  },
+  {
+    segment: AdminRoutesNavigations.CLIENTS,
+    title: "Clients",
+    icon: <Users />,
   },
   {
     segment: AdminRoutesNavigations.EXPENSE,
     title: "Dépenses",
-    icon: <CircleDollarSign />,
+    icon: <TrendingDown />,
   },
 ];

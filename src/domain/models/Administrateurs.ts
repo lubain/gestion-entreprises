@@ -1,4 +1,4 @@
 export interface administrateurs {
   id: number;
-  utilisateur_id: number;
+  user_id: number;
 }

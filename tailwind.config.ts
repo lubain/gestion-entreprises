@@ -59,19 +59,6 @@ export default {
           DEFAULT: "hsl(var(--orange))",
           foreground: "hsl(var(--orange-foreground))",
         },
-        // black: {
-        //   DEFAULT: BLACK,
-        //   foreground: "#FFFFFF",
-        // },
-
-        // primary: {
-        //   DEFAULT: PRIMARY,
-        //   foreground: "#FFFFFF",
-        // },
-        // secondary: {
-        //   DEFAULT: SECONDARY,
-        //   foreground: "#1A202C",
-        // },
         destructive: {
           DEFAULT: DESTRUCTIVE,
           foreground: "#FFFFFF",
