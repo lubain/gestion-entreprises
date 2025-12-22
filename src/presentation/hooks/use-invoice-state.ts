@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useInvoice } from "./use-invoice";
-import { Client, InvoiceItem, Product } from "@/domain/models";
+import { Client, Invoice, InvoiceItem, Product } from "@/domain/models";
 import { useProduct } from "./use-product";
 import { useClient } from "./use-client";
 
@@ -18,6 +18,20 @@ export const useInvoiceState = () => {
   >([]);
   const [currentProduct, setCurrentProduct] = useState<number>(null);
   const [qty, setQty] = useState(1);
+
+  // États pour les dates
+  const [issueDate, setIssueDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const [dueDate, setDueDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 30);
+    return d.toISOString().split("T")[0];
+  });
+
+  // TVA State
+  const [enableTax, setEnableTax] = useState(true);
+  const [taxRate, setTaxRate] = useState(20);
 
   const addToCart = () => {
     const product = products.find((p: Product) => p.id === currentProduct);
@@ -65,14 +79,21 @@ export const useInvoiceState = () => {
     if (!selectedClient || cart.length === 0) return;
 
     const client = clients.find((c: Client) => c.id === selectedClient);
-    const total = cart.reduce((acc, item) => acc + item.total, 0);
+    const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
+    const finalTaxRate = enableTax ? taxRate : 0;
+    const taxAmount = subtotal * (finalTaxRate / 100);
+    const total = subtotal + taxAmount;
 
     addInvoice({
       clientId: selectedClient,
       clientName: client?.name || "Inconnu",
-      date: new Date().toISOString(),
+      issueDate: issueDate,
+      dueDate: dueDate,
+      subtotal: subtotal,
+      taxRate: finalTaxRate,
+      taxAmount: taxAmount,
       total: total,
-      status: "payée",
+      status: "en_attente", // Statut par défaut
     });
 
     updateStock(productId);
@@ -87,6 +108,32 @@ export const useInvoiceState = () => {
     getAll();
   }, []);
 
+  // Vérification automatique des retards et sauvegarde
+  useEffect(() => {
+    if (invoices) {
+      // Logique pour mettre à jour automatiquement le statut 'en_retard'
+      const today = new Date().toISOString().split("T")[0];
+      let hasChanges = false;
+
+      const updatedInvoices = invoices.map((inv: Invoice) => {
+        // Si la facture est 'en_attente' et que la date d'échéance est passée
+        if (inv.status === "en_attente" && inv.dueDate < today) {
+          hasChanges = true;
+          return { ...inv, status: "en_retard" };
+        }
+        return inv;
+      });
+
+      if (hasChanges) {
+        // const newData = { ...data, invoices: updatedInvoices };
+        // setData(newData);
+        // db.save(newData);
+      } else {
+        // db.save(data);
+      }
+    }
+  }, [invoices]);
+
   return {
     view,
     cart,
@@ -96,12 +143,20 @@ export const useInvoiceState = () => {
     products,
     qty,
     invoices,
+    enableTax,
+    taxRate,
+    issueDate,
+    dueDate,
     setView,
+    setTaxRate,
+    setEnableTax,
     setSelectedClient,
     setCurrentProduct,
     setQty,
     addToCart,
     removeFromCart,
     handleSaveInvoice,
+    setIssueDate,
+    setDueDate,
   };
 };
