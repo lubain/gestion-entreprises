@@ -6,7 +6,7 @@ import { useInvoice } from "./use-invoice";
 import { useEffect } from "react";
 
 export const useDashboardView = () => {
-  const { invoices } = useInvoice();
+  const { invoices, getAll: getAllInvoices } = useInvoice();
   const { expenses, getAll: getAllExpenses } = useExpense();
   const { products, getAll: getAllProducts } = useProduct();
   const { clients, getAll: getAllClients } = useClient();
@@ -27,6 +27,7 @@ export const useDashboardView = () => {
     getAllExpenses();
     getAllClients();
     getAllProducts();
+    getAllInvoices();
   }, []);
 
   return {

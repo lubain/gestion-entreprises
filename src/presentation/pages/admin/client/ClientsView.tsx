@@ -90,16 +90,18 @@ const ClientsView = () => {
                 <h3 className="font-bold text-lg text-slate-800 dark:text-white">
                   {c.name}
                 </h3>
-                <p className="text-slate-500 text-sm flex items-center gap-1 mt-1">
+                <p className="text-slate-500 dark:text-white text-sm flex items-center gap-1 mt-1">
                   <Users size={14} /> {c.phone}
                 </p>
-                <p className="text-slate-500 text-sm mt-1">{c.email}</p>
+                <p className="text-slate-500 dark:text-white text-sm mt-1">
+                  {c.email}
+                </p>
               </div>
               <div className="h-8 w-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 font-bold">
                 {c.name.charAt(0)}
               </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-400">
+            <div className="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-400 dark:text-white">
               {c.address || "Aucune adresse"}
             </div>
           </Card>

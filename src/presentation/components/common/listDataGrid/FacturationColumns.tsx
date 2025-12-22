@@ -4,7 +4,7 @@ import { CheckCircle, Printer } from "lucide-react";
 import { Chip, IconButton } from "@mui/material";
 
 // Helper pour l'affichage des badges de statut
-const StatusBadge = ({ status }: { status: string }) => {
+export const StatusBadge = ({ status }: { status: string }) => {
   switch (status) {
     case "payée":
       return <Badge color="green">Payée</Badge>;

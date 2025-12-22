@@ -21,10 +21,8 @@ import { LogOutModal } from "../common/modal/LogOutModal";
 export const User = () => {
   const user = useAppSelector((state) => state.authentification.user);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const navigate = useNavigate();
-  const [isNotOnLayoutDashboard, setIsNotOnLayoutDashboard] =
-    React.useState(false);
   const [isLogOutModalOpen, setIsLogOutModalOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,16 +30,6 @@ export const User = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleNavigateToDashboard = () => {
-    switch (user?.role) {
-      case utilisateurs_role_enum.ADMIN:
-        navigate(`/${AdminRoutesNavigations.DASHBOARD}`);
-        break;
-      default:
-        break;
-    }
   };
 
   const handleNavigateToProfile = () => {
@@ -53,10 +41,6 @@ export const User = () => {
         break;
     }
   };
-
-  React.useEffect(() => {
-    setIsNotOnLayoutDashboard(!location.pathname.includes("/admin/"));
-  }, [location.pathname]);
 
   const handleCloseModal = async () => {
     setIsLogOutModalOpen(false);
@@ -98,22 +82,16 @@ export const User = () => {
           horizontal: "right",
         }}
       >
-        {user?.id && isNotOnLayoutDashboard && (
-          <MenuItem
-            onClick={handleNavigateToDashboard}
-            className="flex items-center gap-2"
-          >
-            <LayoutDashboard /> <Typography>Tableau de bord</Typography>
-          </MenuItem>
-        )}
         <MenuItem
           onClick={() => {
             handleClose();
-            handleNavigateToProfile();
           }}
           className="flex items-center gap-2"
         >
-          <UserIcon /> <Typography>Profil</Typography>
+          <UserIcon />{" "}
+          <Typography>
+            {user?.nom} {user?.prenom}
+          </Typography>
         </MenuItem>
         <MenuItem onClick={handleClose} className="flex items-center gap-2">
           <SettingsIcon /> <Typography>Parametre</Typography>
