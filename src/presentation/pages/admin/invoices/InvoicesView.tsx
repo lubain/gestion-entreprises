@@ -1,9 +1,8 @@
-import { Plus, Trash2, Save, Printer } from "lucide-react";
+import { Plus, Trash2, Save } from "lucide-react";
 import { Card } from "@/presentation/components/ui/Card";
 import { Button } from "@/presentation/components/ui/Button";
 import { Input } from "@/presentation/components/ui/Input";
-import { Badge } from "@/presentation/components/ui/Badge";
-import { Client, Invoice, Product } from "@/domain/models";
+import { Client, Product } from "@/domain/models";
 import { useInvoiceState } from "@/presentation/hooks/use-invoice-state";
 import ListDataGrid from "@/presentation/components/common/listDataGrid/ListDataGrid";
 
@@ -17,6 +16,14 @@ const InvoicesView = () => {
     products,
     qty,
     invoices,
+    enableTax,
+    taxRate,
+    issueDate,
+    dueDate,
+    setIssueDate,
+    setDueDate,
+    setTaxRate,
+    setEnableTax,
     setCurrentProduct,
     setQty,
     setView,
@@ -27,7 +34,9 @@ const InvoicesView = () => {
   } = useInvoiceState();
 
   if (view === "create") {
-    const cartTotal = cart.reduce((acc, item) => acc + item.total, 0);
+    const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
+    const finalTaxAmount = enableTax ? subtotal * (taxRate / 100) : 0;
+    const totalTTC = subtotal + finalTaxAmount;
 
     return (
       <div className="space-y-6 animate-in slide-in-from-right-4">
@@ -50,7 +59,7 @@ const InvoicesView = () => {
               <select
                 className="w-full p-3 border border-slate-300 rounded-md bg-white"
                 value={selectedClient}
-                onChange={(e) => setSelectedClient(Number(e.target.value))}
+                onChange={(e) => setSelectedClient(parseInt(e.target.value))}
               >
                 <option value="">-- Choisir un client --</option>
                 {clients.map((c: Client) => (
@@ -63,7 +72,7 @@ const InvoicesView = () => {
 
             <Card className="p-6">
               <h3 className="font-bold mb-4 text-slate-700">
-                2. Ajouter des produits
+                2. Ajouter des produits (HT)
               </h3>
               <div className="flex gap-2 items-end">
                 <div className="flex-1">
@@ -99,15 +108,14 @@ const InvoicesView = () => {
                 </Button>
               </div>
 
-              {/* Liste des articles ajoutés */}
               <div className="mt-6">
                 <table className="w-full text-sm text-left">
                   <thead className="text-slate-500 border-b border-slate-100">
                     <tr>
                       <th className="pb-2">Désignation</th>
                       <th className="pb-2 text-right">Qté</th>
-                      <th className="pb-2 text-right">Prix</th>
-                      <th className="pb-2 text-right">Total</th>
+                      <th className="pb-2 text-right">PU HT</th>
+                      <th className="pb-2 text-right">Total HT</th>
                       <th className="w-10"></th>
                     </tr>
                   </thead>
@@ -148,19 +156,85 @@ const InvoicesView = () => {
           <div className="lg:col-span-1">
             <Card className="p-6 sticky top-6 bg-slate-800 text-white border-slate-700">
               <h3 className="font-bold text-lg mb-4">Résumé</h3>
-              <div className="flex justify-between mb-2 text-slate-300">
-                <span>Articles</span>
-                <span>{cart.length}</span>
+
+              <div className="space-y-3 mb-6">
+                <div>
+                  <label className="text-xs font-semibold text-slate-400 uppercase block mb-1">
+                    Date d'émission
+                  </label>
+                  <input
+                    type="date"
+                    value={issueDate}
+                    onChange={(e) => setIssueDate(e.target.value)}
+                    className="w-full bg-slate-700 border-none rounded text-white px-2 py-1 text-sm focus:ring-1 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-slate-400 uppercase block mb-1">
+                    Date d'échéance
+                  </label>
+                  <input
+                    type="date"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                    className="w-full bg-slate-700 border-none rounded text-white px-2 py-1 text-sm focus:ring-1 focus:ring-blue-500"
+                  />
+                </div>
               </div>
-              <div className="flex justify-between mb-6 text-slate-300">
-                <span>Date</span>
-                <span>{new Date().toLocaleDateString()}</span>
+
+              {/* Gestion TVA */}
+              <div className="mb-6 p-3 bg-slate-700 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium">Appliquer TVA</span>
+                  <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input
+                      type="checkbox"
+                      name="toggle"
+                      id="toggle"
+                      checked={enableTax}
+                      onChange={(e) => setEnableTax(e.target.checked)}
+                      className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:right-0 right-5"
+                    />
+                    <label
+                      htmlFor="toggle"
+                      className={`toggle-label block overflow-hidden h-5 rounded-full cursor-pointer ${enableTax ? "bg-blue-500" : "bg-gray-400"}`}
+                    ></label>
+                  </div>
+                </div>
+                {enableTax && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-300">Taux</span>
+                    <select
+                      value={taxRate}
+                      onChange={(e) => setTaxRate(Number(e.target.value))}
+                      className="bg-slate-600 text-white text-xs p-1 rounded border-none"
+                    >
+                      <option value={20}>20%</option>
+                      <option value={10}>10%</option>
+                      <option value={5.5}>5.5%</option>
+                      <option value={0}>0%</option>
+                    </select>
+                  </div>
+                )}
               </div>
-              <div className="border-t border-slate-600 pt-4 flex justify-between items-center mb-6">
-                <span className="text-xl font-bold">Total</span>
-                <span className="text-2xl font-bold text-green-400">
-                  {cartTotal.toFixed(2)} €
-                </span>
+
+              <div className="border-t border-slate-600 pt-4 space-y-2 mb-6">
+                <div className="flex justify-between text-slate-300 text-sm">
+                  <span>Total HT</span>
+                  <span>{subtotal.toFixed(2)} €</span>
+                </div>
+                {enableTax && (
+                  <div className="flex justify-between text-slate-300 text-sm">
+                    <span>TVA ({taxRate}%)</span>
+                    <span>{finalTaxAmount.toFixed(2)} €</span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center pt-2 border-t border-slate-700">
+                  <span className="text-xl font-bold">Total TTC</span>
+                  <span className="text-2xl font-bold text-green-400">
+                    {totalTTC.toFixed(2)} €
+                  </span>
+                </div>
               </div>
 
               <button
