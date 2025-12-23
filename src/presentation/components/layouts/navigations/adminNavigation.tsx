@@ -10,16 +10,9 @@ import {
 
 export const ADMIN_NAVIGATION: Navigation = [
   {
-    kind: "header",
-    title: "Principale",
-  },
-  {
     segment: AdminRoutesNavigations.DASHBOARD,
     title: "Tableau de bord",
     icon: <LayoutDashboard />,
-  },
-  {
-    kind: "divider",
   },
   {
     segment: AdminRoutesNavigations.INVOICES,

@@ -6,7 +6,7 @@ export const Input = (props: any) => {
   return (
     <div className="flex flex-col gap-1 w-full">
       {props.label && (
-        <label className="text-xs font-semibold text-slate-500 uppercase">
+        <label className="text-xs font-semibold text-slate-500 dark:text-white uppercase">
           {props.label}
         </label>
       )}

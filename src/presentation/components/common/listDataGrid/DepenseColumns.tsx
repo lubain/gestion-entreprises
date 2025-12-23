@@ -20,13 +20,13 @@ export const DepenseColumns = (): GridColDef[] => {
     {
       field: "description",
       headerName: "Description",
-      width: 150,
+      width: 400,
       headerClassName: "font-semibold",
     },
     {
       field: "category",
       headerName: "Catégorie",
-      width: 150,
+      width: 200,
       renderCell: (params) => (
         <Badge color="orange">{params.row.category}</Badge>
       ),

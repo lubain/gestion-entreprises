@@ -44,7 +44,7 @@ const InvoicesView = () => {
           <Button variant="ghost" onClick={() => setView("list")}>
             ← Retour
           </Button>
-          <h2 className="text-2xl font-bold text-slate-800">
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
             Nouvelle Facture
           </h2>
         </div>
@@ -57,7 +57,7 @@ const InvoicesView = () => {
                 1. Sélectionner le Client
               </h3>
               <select
-                className="w-full p-3 border border-slate-300 rounded-md bg-white"
+                className="w-full p-3 border border-slate-300 rounded-md bg-white dark:bg-transparent"
                 value={selectedClient}
                 onChange={(e) => setSelectedClient(parseInt(e.target.value))}
               >
@@ -80,7 +80,7 @@ const InvoicesView = () => {
                     Produit
                   </label>
                   <select
-                    className="w-full p-2.5 border border-slate-300 rounded-md bg-white text-sm"
+                    className="w-full p-2.5 border border-slate-300 rounded-md bg-white dark:bg-transparent text-sm"
                     value={currentProduct}
                     onChange={(e) =>
                       setCurrentProduct(parseInt(e.target.value))
@@ -193,7 +193,7 @@ const InvoicesView = () => {
                       id="toggle"
                       checked={enableTax}
                       onChange={(e) => setEnableTax(e.target.checked)}
-                      className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:right-0 right-5"
+                      className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white dark:bg-transparent border-4 appearance-none cursor-pointer checked:right-0 right-5"
                     />
                     <label
                       htmlFor="toggle"

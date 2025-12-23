@@ -7,6 +7,6 @@ export class AdminRoutesNavigations {
   static DASHBOARD = "admin/dashboard";
   static INVOICES = "admin/invoices";
   static STOCK = "admin/stock";
-  static EXPENSE = "admin/expence";
+  static EXPENSE = "admin/expense";
   static CLIENTS = "admin/clients";
 }

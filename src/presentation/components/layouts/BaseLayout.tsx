@@ -36,17 +36,12 @@ export default function BaseLayout({ navigation }: BaseLayoutProps) {
             slots={{ appTitle: "a", toolbarAccount: User }}
             sidebarExpandedWidth={250}
             sidebarCollapsedWidth={0}
-            sx={{
-              height: "100vh",
-              "& .MuiDrawer-paper": {
-                overflow: "auto",
-              },
-              "& .MuiBox-root": {
-                overflow: "auto",
-              },
-            }}
           >
-            <PageContainer title={""} breadcrumbs={[]}>
+            <PageContainer
+              className="bg-slate-50 dark:bg-transparent"
+              title={""}
+              breadcrumbs={[]}
+            >
               <Outlet />
             </PageContainer>
           </DashboardLayout>

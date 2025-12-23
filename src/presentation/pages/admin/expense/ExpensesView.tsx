@@ -22,6 +22,7 @@ const ExpensesView = () => {
           icon={Plus}
           onClick={() => setIsAdding(true)}
           variant="secondary"
+          className="dark:bg-transparent dark:text-white"
         >
           Ajouter Dépense
         </Button>
@@ -56,7 +57,7 @@ const ExpensesView = () => {
               required
             />
             <div className="w-full md:w-48">
-              <label className="text-xs font-semibold text-slate-500 uppercase mb-1 block">
+              <label className="text-xs font-semibold text-slate-500 dark:text-white uppercase mb-1 block">
                 Catégorie
               </label>
               <select
