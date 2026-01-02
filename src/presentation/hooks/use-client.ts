@@ -3,13 +3,13 @@ import { AppDispatch, RootState } from "@/store";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createClientSlice,
-  getAllClientSlices,
-  updateClientSlice,
-  deleteClientSlice,
   setSelectedClientSlice,
   clearSelectedClientSlice,
-} from "@/application/slices/admin/clientSlice";
+} from "@/application/slices/admin/client";
+import { createClientSlice } from "@/application/slices/admin/client/createClientSlice";
+import { getAllClientSlices } from "@/application/slices/admin/client/getAllClientSlices";
+import { updateClientSlice } from "@/application/slices/admin/client/updateClientSlice";
+import { deleteClientSlice } from "@/application/slices/admin/client/deleteClientSlice";
 
 export const useClient = () => {
   const dispatch = useDispatch<AppDispatch>();

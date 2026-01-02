@@ -1,18 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { Invoice } from "@/domain/models";
-
-import {
-  CreateInvoiceRepository,
-  DeleteInvoiceRepository,
-  GetAllInvoiceRepository,
-  UpdateInvoiceRepository,
-} from "@/infrastructure/repositories/invoice";
-import {
-  CreateInvoiceUseCase,
-  DeleteInvoiceUseCase,
-  GetAllInvoiceUseCase,
-  UpdateInvoiceUseCase,
-} from "@/domain/usecases/invoice";
+import { createInvoiceSlice } from "./createInvoiceSlice";
+import { getAllInvoiceSlices } from "./getAllClientSlices";
+import { updateInvoiceSlice } from "./updateInvoiceSlice";
+import { deleteInvoiceSlice } from "./deleteInvoiceSlice";
 
 interface InvoiceSliceState {
   invoices: Invoice[];
@@ -27,73 +18,6 @@ const initialState: InvoiceSliceState = {
   loading: false,
   error: null,
 };
-
-export const createInvoiceSlice = createAsyncThunk(
-  "invoice/create",
-  async (data: Omit<Invoice, "id">, { rejectWithValue }) => {
-    try {
-      const createInvoiceRepository = new CreateInvoiceRepository();
-      const createInvoiceUseCase = new CreateInvoiceUseCase(
-        createInvoiceRepository
-      );
-      const result = await createInvoiceUseCase.execute(data);
-      return result;
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  }
-);
-
-export const getAllInvoiceSlices = createAsyncThunk(
-  "invoice/getAll",
-  async (_, { rejectWithValue }) => {
-    try {
-      const getAllInvoiceRepository = new GetAllInvoiceRepository();
-      const getAllInvoiceUseCase = new GetAllInvoiceUseCase(
-        getAllInvoiceRepository
-      );
-      const result = await getAllInvoiceUseCase.execute();
-      return result;
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  }
-);
-
-export const updateInvoiceSlice = createAsyncThunk(
-  "invoice/update",
-  async (
-    { id, data }: { id: number; data: Partial<Invoice> },
-    { rejectWithValue }
-  ) => {
-    try {
-      const updateInvoiceRepository = new UpdateInvoiceRepository();
-      const updateInvoiceUseCase = new UpdateInvoiceUseCase(
-        updateInvoiceRepository
-      );
-      const result = await updateInvoiceUseCase.execute(id, data);
-      return result;
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  }
-);
-
-export const deleteInvoiceSlice = createAsyncThunk(
-  "invoice/delete",
-  async (id: number, { rejectWithValue }) => {
-    try {
-      const deleteInvoiceRepository = new DeleteInvoiceRepository();
-      const deleteInvoiceUseCase = new DeleteInvoiceUseCase(
-        deleteInvoiceRepository
-      );
-      await deleteInvoiceUseCase.execute(id);
-      return id;
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  }
-);
 
 const invoiceSlice = createSlice({
   name: "invoice",

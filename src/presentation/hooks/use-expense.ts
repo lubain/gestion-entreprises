@@ -3,13 +3,13 @@ import { AppDispatch, RootState } from "@/store";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createExpenseSlice,
-  getAllExpenseSlices,
-  updateExpenseSlice,
-  deleteExpenseSlice,
   setSelectedExpenseSlice,
   clearSelectedExpenseSlice,
-} from "@/application/slices/admin/expenseSlice";
+} from "@/application/slices/admin/expense";
+import { createExpenseSlice } from "@/application/slices/admin/expense/createExpenseSlice";
+import { getAllExpenseSlices } from "@/application/slices/admin/expense/getAllExpenseSlices";
+import { updateExpenseSlice } from "@/application/slices/admin/expense/updateExpenseSlice";
+import { deleteExpenseSlice } from "@/application/slices/admin/expense/deleteExpenseSlice";
 
 export const useExpense = () => {
   const dispatch = useDispatch<AppDispatch>();

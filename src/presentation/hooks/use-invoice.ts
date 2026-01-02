@@ -3,13 +3,14 @@ import { AppDispatch, RootState } from "@/store";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createInvoiceSlice,
-  getAllInvoiceSlices,
-  updateInvoiceSlice,
-  deleteInvoiceSlice,
   setSelectedInvoiceSlice,
   clearSelectedInvoiceSlice,
-} from "@/application/slices/admin/invoiceSlice";
+} from "@/application/slices/admin/invoice";
+import { createInvoiceSlice } from "@/application/slices/admin/invoice/createInvoiceSlice";
+import { getAllInvoiceSlices } from "@/application/slices/admin/invoice/getAllClientSlices";
+import { updateInvoiceSlice } from "@/application/slices/admin/invoice/updateInvoiceSlice";
+import { deleteInvoiceSlice } from "@/application/slices/admin/invoice/deleteInvoiceSlice";
+import { MarkAsPaiedSlice } from "@/application/slices/admin/invoice/MarkAsPaiedSlice";
 
 export const useInvoice = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,6 +32,13 @@ export const useInvoice = () => {
   const update = useCallback(
     async (id: number, data: Partial<Invoice>) => {
       await dispatch(updateInvoiceSlice({ id, data }));
+    },
+    [dispatch]
+  );
+
+  const MarkAsPaied = useCallback(
+    async (id: number) => {
+      await dispatch(MarkAsPaiedSlice(id));
     },
     [dispatch]
   );
@@ -62,6 +70,7 @@ export const useInvoice = () => {
     select,
     getAll,
     update,
+    MarkAsPaied,
     remove,
     clearSelected,
   };

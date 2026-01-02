@@ -1,6 +1,6 @@
-import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Badge } from "../../ui/Badge";
-import { ArrowUpDown, Printer } from "lucide-react";
+import StockAction from "./StockAction";
 
 export const StockColumns = (): GridColDef[] => {
   return [
@@ -45,26 +45,7 @@ export const StockColumns = (): GridColDef[] => {
       field: "actions",
       headerName: "Actions",
       width: 100,
-      renderCell: (params) => (
-        <p>
-          {params.row.stock < 9999 && (
-            <button
-              onClick={
-                () => ""
-                // setAdjustmentData({
-                //   product: p,
-                //   type: "add",
-                //   quantity: 1,
-                // })
-              }
-              className="text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
-              title="Ajuster le stock"
-            >
-              <ArrowUpDown size={18} />
-            </button>
-          )}
-        </p>
-      ),
+      renderCell: (params) => <StockAction product={params.row} />,
       headerClassName: "font-semibold",
     },
   ];

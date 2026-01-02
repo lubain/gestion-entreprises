@@ -3,3 +3,4 @@ export * from "./GetAllInvoiceUseCase";
 export * from "./GetInvoiceByIdUsecase";
 export * from "./UpdateInvoiceUseCase";
 export * from "./DeleteInvoiceUseCase";
+export * from "./MarkAsPaiedUseCase";

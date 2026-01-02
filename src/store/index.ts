@@ -2,10 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import notificationSliceReducer from "@/application/slices/notification/notificationSlice";
 import userSliceReducer from "@/application/slices/auth/userSlice";
 import authSliceReducer from "@/application/slices/auth/authSlice";
-import clientSliceReducer from "@/application/slices/admin/clientSlice";
-import expenseSliceReducer from "@/application/slices/admin/expenseSlice";
-import productSliceReducer from "@/application/slices/admin/productSlice";
-import invoiceSliceReducer from "@/application/slices/admin/invoiceSlice";
+import clientSliceReducer from "@/application/slices/admin/client";
+import expenseSliceReducer from "@/application/slices/admin/expense";
+import productSliceReducer from "@/application/slices/admin/product";
+import invoiceSliceReducer from "@/application/slices/admin/invoice";
 
 export const store = configureStore({
   reducer: {

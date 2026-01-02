@@ -2,6 +2,7 @@ import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Badge } from "../../ui/Badge";
 import { CheckCircle, Printer } from "lucide-react";
 import { Chip, IconButton } from "@mui/material";
+import FacturationAction from "./FacturationAction";
 
 // Helper pour l'affichage des badges de statut
 export const StatusBadge = ({ status }: { status: string }) => {
@@ -66,22 +67,7 @@ export const FacturationColumns = (): GridColDef[] => {
       field: "actions",
       headerName: "Actions",
       width: 100,
-      renderCell: (params) => (
-        <p className="flex items-center justify-center">
-          {params.row.status !== "payée" && (
-            <button
-              //  onClick={() => updateInvoiceStatus(params.row.id, 'payée')}
-              title="Marquer comme payée"
-              className="text-green-600 hover:bg-green-50 rounded transition-colors"
-            >
-              <CheckCircle size={16} />
-            </button>
-          )}
-          <IconButton>
-            <Printer size={16} className="mx-auto" />
-          </IconButton>
-        </p>
-      ),
+      renderCell: (params) => <FacturationAction invoice={params.row} />,
       headerClassName: "font-semibold",
     },
   ];

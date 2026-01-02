@@ -3,14 +3,14 @@ import { AppDispatch, RootState } from "@/store";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createProductSlice,
-  getAllProductSlices,
-  updateProductSlice,
-  updateProductStockSlice,
-  deleteProductSlice,
   setSelectedProductSlice,
   clearSelectedProductSlice,
-} from "@/application/slices/admin/productSlice";
+} from "@/application/slices/admin/product";
+import { getAllProductSlices } from "@/application/slices/admin/product/getAllProductSlices";
+import { createProductSlice } from "@/application/slices/admin/product/createProductSlice";
+import { updateProductSlice } from "@/application/slices/admin/product/updateProductSlice";
+import { updateProductStockSlice } from "@/application/slices/admin/product/updateProductStockSlice";
+import { deleteProductSlice } from "@/application/slices/admin/product/deleteProductSlice";
 
 export const useProduct = () => {
   const dispatch = useDispatch<AppDispatch>();
