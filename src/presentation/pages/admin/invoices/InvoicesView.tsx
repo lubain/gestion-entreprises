@@ -3,7 +3,7 @@ import { Card } from "@/presentation/components/ui/Card";
 import { Button } from "@/presentation/components/ui/Button";
 import { Input } from "@/presentation/components/ui/Input";
 import { Client, Product } from "@/domain/models";
-import { useInvoiceState } from "@/presentation/hooks/use-invoice-state";
+import { useInvoiceState } from "@/presentation/hooks/invoice/use-invoice-state";
 import ListDataGrid from "@/presentation/components/common/listDataGrid/ListDataGrid";
 
 const InvoicesView = () => {

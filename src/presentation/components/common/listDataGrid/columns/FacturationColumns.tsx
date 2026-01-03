@@ -1,8 +1,6 @@
-import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { Badge } from "../../ui/Badge";
-import { CheckCircle, Printer } from "lucide-react";
-import { Chip, IconButton } from "@mui/material";
-import FacturationAction from "./FacturationAction";
+import { Badge } from "@/presentation/components/ui/Badge";
+import { GridColDef } from "@mui/x-data-grid";
+import FacturationAction from "../action/FacturationAction";
 
 // Helper pour l'affichage des badges de statut
 export const StatusBadge = ({ status }: { status: string }) => {

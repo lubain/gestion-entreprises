@@ -1,6 +1,6 @@
+import { Badge } from "@/presentation/components/ui/Badge";
 import { GridColDef } from "@mui/x-data-grid";
-import { Badge } from "../../ui/Badge";
-import StockAction from "./StockAction";
+import StockAction from "../action/StockAction";
 
 export const StockColumns = (): GridColDef[] => {
   return [

@@ -1,5 +1,5 @@
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { Badge } from "../../ui/Badge";
+import { Badge } from "../../../ui/Badge";
 import { Printer } from "lucide-react";
 import { Chip, IconButton } from "@mui/material";
 

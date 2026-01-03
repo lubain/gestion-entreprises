@@ -1,8 +1,8 @@
 import { AlertCircle } from "lucide-react";
 import { Card } from "@/presentation/components/ui/Card";
-import { Expense, Invoice, Product } from "@/domain/models";
-import { useDashboardView } from "@/presentation/hooks/use-dashboard-view";
-import { StatusBadge } from "@/presentation/components/common/listDataGrid/FacturationColumns";
+import { Invoice, Product } from "@/domain/models";
+import { useDashboardView } from "@/presentation/hooks/dashboard/use-dashboard-view";
+import { StatusBadge } from "@/presentation/components/common/listDataGrid/columns/FacturationColumns";
 
 const DashboardView = () => {
   const { totalExpenses, totalSales, lowStockItems, clients, invoices } =

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useToast } from "../components/common/toast/Toast";
+import { useToast } from "@/presentation/components/common/toast/Toast";
 import { resetPassword } from "@/application/slices/auth/authSlice";
 import { AppDispatch } from "@/store";
 
@@ -48,11 +48,11 @@ export const useForgotPassword = (): UseForgotPasswordReturn => {
       } else {
         throw new Error(result.payload as string);
       }
-
     } catch (error) {
-      const errorMessage = error instanceof Error
-        ? error.message
-        : "Erreur lors de l'envoi du lien de réinitialisation";
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Erreur lors de l'envoi du lien de réinitialisation";
 
       toast.error(errorMessage);
       throw error;

@@ -9,7 +9,7 @@ import {
 } from "@/shared/constants/AppRoutesNavigation";
 import { Utilisateur } from "@/domain/models";
 import { LoginUserDTO } from "@/domain/DTOS/LoginUserDTO";
-import { useToast } from "../components/common/toast/Toast";
+import { useToast } from "@/presentation/components/common/toast/Toast";
 
 const useLogin = () => {
   const toast = useToast();

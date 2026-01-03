@@ -1,5 +1,5 @@
 import { Invoice, Product } from "@/domain/models";
-import { useInvoice } from "@/presentation/hooks/use-invoice";
+import { useInvoice } from "@/presentation/hooks/invoice/use-invoice";
 import { IconButton } from "@mui/material";
 import { CheckCircle, Printer } from "lucide-react";
 

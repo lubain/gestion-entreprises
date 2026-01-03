@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, Button, Slide } from "@mui/material";
 import { X, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
-import useLogin from "@/presentation/hooks/use-login";
+import useLogin from "@/presentation/hooks/authentification/use-login";
 import { TransitionProps } from "@mui/material/transitions";
 import React from "react";
 

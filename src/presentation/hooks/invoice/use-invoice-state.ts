@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useInvoice } from "./use-invoice";
 import { Client, Invoice, InvoiceItem, Product } from "@/domain/models";
-import { useProduct } from "./use-product";
-import { useClient } from "./use-client";
+import { useProduct } from "../product/use-product";
+import { useClient } from "../client/use-client";
 
 export const useInvoiceState = () => {
   const { products, updateStock } = useProduct();

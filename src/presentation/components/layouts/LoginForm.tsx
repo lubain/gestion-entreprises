@@ -1,9 +1,12 @@
 import * as z from "zod";
-import useLogin from "@/presentation/hooks/use-login";
+import useLogin from "@/presentation/hooks/authentification/use-login";
 import { useToast } from "../common/toast/Toast";
 import EmailLogin from "./EmailLogin";
 import PasswordLogin from "./PasswordLogin";
-import { formSchema, UseLoginForm } from "@/presentation/hooks/use-login-form";
+import {
+  formSchema,
+  UseLoginForm,
+} from "@/presentation/hooks/authentification/use-login-form";
 import { Link } from "react-router-dom";
 import ScrollToTop from "../common/navigation/ScrollToTop";
 import { motion } from "framer-motion";

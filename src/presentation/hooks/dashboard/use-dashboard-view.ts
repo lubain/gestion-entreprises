@@ -1,8 +1,8 @@
 import { Expense, Invoice, Product } from "@/domain/models";
-import { useExpense } from "./use-expense";
-import { useProduct } from "./use-product";
-import { useClient } from "./use-client";
-import { useInvoice } from "./use-invoice";
+import { useExpense } from "../expense/use-expense";
+import { useProduct } from "../product/use-product";
+import { useClient } from "../client/use-client";
+import { useInvoice } from "../invoice/use-invoice";
 import { useEffect } from "react";
 
 export const useDashboardView = () => {

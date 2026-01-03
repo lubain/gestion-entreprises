@@ -1,7 +1,7 @@
 import { PublicRoutesNavigation } from "@/shared/constants/AppRoutesNavigation";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import useLogin from "../use-login";
+import useLogin from "./use-login";
 import { useAppSelector } from "../redux";
 
 const time = 15; // 15 minutes

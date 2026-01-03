@@ -1,11 +1,8 @@
-import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import { Card } from "@/presentation/components/ui/Card";
 import { Button } from "@/presentation/components/ui/Button";
 import { Input } from "@/presentation/components/ui/Input";
-import { Badge } from "@/presentation/components/ui/Badge";
-import { Expense } from "@/domain/models";
-import { useExpenseState } from "@/presentation/hooks/use-expense-state";
+import { useExpenseState } from "@/presentation/hooks/expense/use-expense-state";
 import ListDataGrid from "@/presentation/components/common/listDataGrid/ListDataGrid";
 
 const ExpensesView = () => {

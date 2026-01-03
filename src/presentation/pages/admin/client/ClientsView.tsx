@@ -1,10 +1,9 @@
-import React, { useState } from "react";
 import { Users, Plus } from "lucide-react";
 import { Card } from "@/presentation/components/ui/Card";
 import { Button } from "@/presentation/components/ui/Button";
 import { Input } from "@/presentation/components/ui/Input";
 import { Client } from "@/domain/models";
-import { useClientState } from "@/presentation/hooks/use-client-state";
+import { useClientState } from "@/presentation/hooks/client/use-client-state";
 
 const ClientsView = () => {
   const {

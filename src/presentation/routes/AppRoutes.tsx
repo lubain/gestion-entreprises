@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "@/presentation/components/common/navigation/ScrollToTop.tsx";
-import { useRestoreAuth } from "@/presentation/hooks/use-restore-auth";
+import { useRestoreAuth } from "@/presentation/hooks/authentification/use-restore-auth.ts";
 import LoadingSpinner from "@/presentation/components/common/LoadingSpinner";
 import PageNotFound from "../components/common/NotFoundPage";
 import { publicRoutes } from "./publicRoutes/publicRoutes";
