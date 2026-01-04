@@ -1,9 +1,16 @@
-export const Badge = ({
-  children,
-  color = "blue",
-}: {
+import React, { ComponentProps } from "react";
+import { twMerge } from "tailwind-merge";
+
+type BadgeProps = ComponentProps<"samp"> & {
   children: React.ReactNode;
   color?: string;
+};
+
+export const Badge: React.FC<BadgeProps> = ({
+  children,
+  color = "blue",
+  className,
+  ...props
 }) => {
   const colors: any = {
     blue: "bg-blue-100 text-blue-800",
@@ -14,7 +21,11 @@ export const Badge = ({
   };
   return (
     <span
-      className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors[color]}`}
+      className={twMerge(
+        `px-2 py-0.5 rounded-full text-xs font-medium ${colors[color]}`,
+        className
+      )}
+      {...props}
     >
       {children}
     </span>

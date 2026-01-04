@@ -1,6 +1,5 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
-import { DashboardError } from '@/presentation/types/dashboard.types';
+import React, { Component, ErrorInfo, ReactNode } from "react";
+import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 
 /**
  * Props pour le composant ErrorBoundary
@@ -69,7 +68,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
   showRetry,
   showHomeButton,
 }) => {
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  const isDevelopment = process.env.NODE_ENV === "development";
 
   return (
     <div className="min-h-[400px] flex items-center justify-center p-6">
@@ -88,8 +87,8 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
 
         {/* Message */}
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          {fallbackMessage || 
-           "Nous rencontrons un problème technique. Veuillez réessayer ou contacter le support si le problème persiste."}
+          {fallbackMessage ||
+            "Nous rencontrons un problème technique. Veuillez réessayer ou contacter le support si le problème persiste."}
         </p>
 
         {/* ID d'erreur */}
@@ -110,7 +109,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
               Réessayer
             </button>
           )}
-          
+
           {showHomeButton && onGoHome && (
             <button
               onClick={onGoHome}
@@ -138,7 +137,9 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
               </div>
               <div>
                 <strong>Component Stack:</strong>
-                <pre className="whitespace-pre-wrap">{errorInfo.componentStack}</pre>
+                <pre className="whitespace-pre-wrap">
+                  {errorInfo.componentStack}
+                </pre>
               </div>
             </div>
           </details>
@@ -150,10 +151,10 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
 
 /**
  * Error Boundary moderne pour React
- * 
+ *
  * Capture les erreurs JavaScript dans l'arbre des composants React,
  * les log et affiche une interface de fallback élégante.
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -168,28 +169,31 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
  *   <Dashboard />
  * </ErrorBoundary>
  * ```
- * 
+ *
  * @architecture
  * - Capture toutes les erreurs React dans l'arbre des composants
  * - Interface de fallback moderne et accessible
  * - Intégration avec les systèmes de monitoring
  * - Support du mode développement avec détails techniques
- * 
+ *
  * @accessibility
  * - Interface accessible avec ARIA labels appropriés
  * - Contraste élevé pour les messages d'erreur
  * - Navigation au clavier pour les boutons d'action
  * - Messages d'erreur clairs et compréhensibles
  */
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    
+
     this.state = {
       hasError: false,
       error: null,
       errorInfo: null,
-      errorId: '',
+      errorId: "",
     };
   }
 
@@ -199,7 +203,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     // Génère un ID unique pour l'erreur
     const errorId = `ERR_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
+
     return {
       hasError: true,
       error,
@@ -219,19 +223,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
 
     // Log l'erreur
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
-
-    // Crée un objet DashboardError pour la cohérence
-    const dashboardError: DashboardError = {
-      code: `REACT_ERROR_${this.state.errorId}`,
-      message: error.message,
-      details: {
-        stack: error.stack,
-        componentStack: errorInfo.componentStack,
-        errorBoundary: 'ErrorBoundary',
-      },
-      timestamp: new Date(),
-    };
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
 
     // TODO: Envoyer à un service de monitoring
     // sendErrorToMonitoring(dashboardError);
@@ -245,7 +237,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       hasError: false,
       error: null,
       errorInfo: null,
-      errorId: '',
+      errorId: "",
     });
   };
 
@@ -254,7 +246,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
    */
   handleGoHome = () => {
     // TODO: Implémenter la navigation vers l'accueil
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   render() {
@@ -266,7 +258,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             errorInfo={this.state.errorInfo}
             errorId={this.state.errorId}
             fallbackMessage={this.props.fallbackMessage}
-            onRetry={this.props.showRetry !== false ? this.handleRetry : undefined}
+            onRetry={
+              this.props.showRetry !== false ? this.handleRetry : undefined
+            }
             onGoHome={this.props.showHomeButton ? this.handleGoHome : undefined}
             showRetry={this.props.showRetry !== false}
             showHomeButton={this.props.showHomeButton || false}
@@ -281,7 +275,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
 /**
  * Hook pour utiliser ErrorBoundary avec des composants fonctionnels
- * 
+ *
  * @hook
  * @returns Fonction pour signaler une erreur manuellement
  */

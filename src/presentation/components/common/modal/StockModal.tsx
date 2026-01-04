@@ -12,6 +12,7 @@ import { X } from "lucide-react";
 import { Input } from "@/presentation/components/ui/Input";
 import { Button } from "@/presentation/components/ui/Button";
 import { useState } from "react";
+import { useProduct } from "@/presentation/hooks/product/use-product";
 
 interface StockModalProps {
   isOpen: boolean;
@@ -21,6 +22,10 @@ interface StockModalProps {
 
 const StockModal = ({ isOpen, product, onClose }: StockModalProps) => {
   const [quantity, setQuantity] = useState<number>(0);
+  const { loading, update } = useProduct();
+  const onSubmit = async (qt: number) => {
+    await update(product.id, { stock: qt });
+  };
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle className="flex justify-between items-center">
@@ -62,7 +67,11 @@ const StockModal = ({ isOpen, product, onClose }: StockModalProps) => {
         <Button onClick={onClose} variant="ghost" type="button">
           Annuler
         </Button>
-        <Button onClick={onClose} type="submit">
+        <Button
+          loading={loading}
+          onClick={() => onSubmit(quantity)}
+          type="submit"
+        >
           Enregistrer
         </Button>
       </DialogActions>

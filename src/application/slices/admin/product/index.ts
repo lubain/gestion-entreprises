@@ -4,6 +4,7 @@ import { createProductSlice } from "./createProductSlice";
 import { getAllProductSlices } from "./getAllProductSlices";
 import { updateProductSlice } from "./updateProductSlice";
 import { deleteProductSlice } from "./deleteProductSlice";
+import { updateProductStockSlice } from "./updateProductStockSlice";
 
 interface ProductSliceState {
   products: Product[];
@@ -73,6 +74,28 @@ const productSlice = createSlice({
         }
       })
       .addCase(updateProductSlice.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // Update stockproduct
+      .addCase(updateProductStockSlice.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProductStockSlice.fulfilled, (state, action) => {
+        state.loading = false;
+
+        action.payload.forEach((updatedProduct) => {
+          const index = state.products.findIndex(
+            (p) => p.id === updatedProduct.id
+          );
+
+          if (index !== -1) {
+            state.products[index] = updatedProduct;
+          }
+        });
+      })
+      .addCase(updateProductStockSlice.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
