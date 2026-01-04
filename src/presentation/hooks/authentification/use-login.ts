@@ -1,6 +1,5 @@
 import { AppDispatch, RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, logoutUser } from "@/application/slices/auth/authSlice";
 import { SuccessMessages } from "@/shared/constants/SuccessMessages";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,6 +9,8 @@ import {
 import { Utilisateur } from "@/domain/models";
 import { LoginUserDTO } from "@/domain/DTOS/LoginUserDTO";
 import { useToast } from "@/presentation/components/common/toast/Toast";
+import { loginUser } from "@/application/slices/auth/loginUser";
+import { logoutUser } from "@/application/slices/auth/logoutUser";
 
 const useLogin = () => {
   const toast = useToast();

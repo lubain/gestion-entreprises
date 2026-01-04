@@ -1,9 +1,8 @@
-import { Utilisateur } from "@/domain/models";
 import { utilisateurs_role_enum } from "@/domain/models/enums";
-import { GetRoleUserUsecase } from "@/domain/usecases/user";
-import { GetRoleUserRepository } from "@/infrastructure/repositories/user/GetRoleUserRepository";
 import { SupabaseError } from "@/infrastructure/supabase/supabaseError";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getRoleUserSelected } from "./getRoleUserSelected";
+
 interface UserState {
   roleUserSelected: utilisateurs_role_enum | null;
   loading: boolean;
@@ -15,20 +14,6 @@ const initialState: UserState = {
   loading: false,
   error: null,
 };
-
-export const getRoleUserSelected = createAsyncThunk(
-  "user/getRoleUserSelected",
-  async (utilisateur_id: number, { rejectWithValue }) => {
-    try {
-      const getRoleUserRepository = new GetRoleUserRepository();
-      const getRoleUserUsecase = new GetRoleUserUsecase(getRoleUserRepository);
-      const role = await getRoleUserUsecase.execute(utilisateur_id);
-      return role;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
 
 const userSlice = createSlice({
   name: "user",

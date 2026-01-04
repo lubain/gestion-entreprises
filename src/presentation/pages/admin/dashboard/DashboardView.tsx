@@ -16,7 +16,7 @@ const DashboardView = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="p-4 border-l-4 border-l-blue-500">
+        <Card className="bg-white p-4 border-l-4 border-l-blue-500">
           <div className="text-slate-500 text-sm dark:text-white font-medium">
             Chiffre d'Affaires
           </div>
@@ -24,7 +24,7 @@ const DashboardView = () => {
             {totalSales.toFixed(2)} €
           </div>
         </Card>
-        <Card className="p-4 border-l-4 border-l-red-500">
+        <Card className="bg-white p-4 border-l-4 border-l-red-500">
           <div className="text-slate-500 text-sm dark:text-white font-medium">
             Dépenses
           </div>
@@ -32,7 +32,7 @@ const DashboardView = () => {
             {totalExpenses.toFixed(2)} €
           </div>
         </Card>
-        <Card className="p-4 border-l-4 border-l-green-500">
+        <Card className="bg-white p-4 border-l-4 border-l-green-500">
           <div className="text-slate-500 text-sm font-medium dark:text-white">
             Bénéfice Net
           </div>
@@ -42,7 +42,7 @@ const DashboardView = () => {
             {(totalSales - totalExpenses).toFixed(2)} €
           </div>
         </Card>
-        <Card className="p-4 border-l-4 border-l-orange-500">
+        <Card className="bg-white p-4 border-l-4 border-l-orange-500">
           <div className="text-slate-500 text-sm dark:text-white font-medium">
             Clients
           </div>
@@ -54,7 +54,7 @@ const DashboardView = () => {
 
       {/* Alerte Stock & Dernières Factures */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="p-0 overflow-hidden">
+        <Card className="bg-white p-0 overflow-hidden">
           <div className="p-4 border-b border-slate-100 flex justify-between items-center">
             <h3 className="font-semibold flex items-center gap-2">
               <AlertCircle size={18} className="text-orange-500" />{" "}
@@ -95,7 +95,7 @@ const DashboardView = () => {
           </div>
         </Card>
 
-        <Card className="p-0 overflow-hidden">
+        <Card className="bg-white p-0 overflow-hidden">
           <div className="p-4 border-b border-slate-100">
             <h3 className="font-semibold text-slate-700 dark:text-white">
               Dernières Factures

@@ -1,6 +1,5 @@
 import { Product } from "@/domain/models";
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -10,14 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import { X } from "lucide-react";
+import { Input } from "@/presentation/components/ui/Input";
+import { Button } from "@/presentation/components/ui/Button";
+import { useState } from "react";
 
 interface StockModalProps {
   isOpen: boolean;
-  stock: Product;
+  product: Product;
   onClose: () => void;
 }
 
-const StockModal = ({ isOpen, stock, onClose }: StockModalProps) => {
+const StockModal = ({ isOpen, product, onClose }: StockModalProps) => {
+  const [quantity, setQuantity] = useState<number>(0);
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle className="flex justify-between items-center">
@@ -29,21 +32,37 @@ const StockModal = ({ isOpen, stock, onClose }: StockModalProps) => {
         </Tooltip>
       </DialogTitle>
       <DialogContent className="mt-4">
-        <div></div>
+        <div className="mb-4 p-3 bg-slate-50 rounded text-sm text-slate-600">
+          Produit :{" "}
+          <span className="font-bold text-slate-800">{product.name}</span>
+          <br />
+          Stock actuel : <span className="font-bold">{product.stock}</span>
+        </div>
+
+        <form className="space-y-4">
+          <div className="flex gap-2 p-1 bg-slate-100 rounded-lg">
+            <button
+              type="button"
+              className="flex-1 py-2 text-sm font-medium rounded-md transition-colors bg-white text-green-700 shadow-sm"
+            >
+              + Entrée
+            </button>
+          </div>
+          <Input
+            label="Quantité"
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
+            autoFocus
+          />
+        </form>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={onClose}
-          variant="outlined"
-          sx={{ textTransform: "none" }}
-        >
+        <Button onClick={onClose} variant="ghost" type="button">
           Annuler
         </Button>
-        <Button
-          onClick={onClose}
-          variant="contained"
-          sx={{ textTransform: "none" }}
-        >
+        <Button onClick={onClose} type="submit">
           Enregistrer
         </Button>
       </DialogActions>

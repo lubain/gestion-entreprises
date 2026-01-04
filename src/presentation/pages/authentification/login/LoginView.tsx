@@ -10,9 +10,9 @@ import { useToast } from "@/presentation/hooks/use-toast";
 
 const LoginView = () => {
   const [showPassword, setShowPassword] = useState(false); // État pour la visibilité du mot de passe
-  const toast = useToast();
   const { errors, register, handleSubmit } = UseLoginForm();
   const { login, loading } = useLogin();
+  const toast = useToast();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {

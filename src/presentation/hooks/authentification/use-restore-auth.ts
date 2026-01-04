@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import { restoreData } from "@/application/slices/auth/authSlice";
 import { useEffect, useState } from "react";
+import { restoreData } from "@/application/slices/auth/restoreData";
 
 export const useRestoreAuth = () => {
   const dispatch = useDispatch<AppDispatch>();

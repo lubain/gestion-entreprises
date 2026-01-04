@@ -1,7 +1,7 @@
 import { Product } from "@/domain/models";
 import { ArrowUpDown } from "lucide-react";
 import { useState } from "react";
-import StockModal from "../modal/StockModal";
+import StockModal from "@/presentation/components/common/modal/StockModal";
 
 interface StockActionProps {
   product: Product;
@@ -24,7 +24,7 @@ export default function StockAction({ product }: StockActionProps) {
         </button>
       )}
       {isModalOpen && (
-        <StockModal isOpen={isModalOpen} stock={product} onClose={onClose} />
+        <StockModal isOpen={isModalOpen} product={product} onClose={onClose} />
       )}
     </>
   );

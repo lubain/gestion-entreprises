@@ -27,7 +27,7 @@ const ClientsView = () => {
       </div>
 
       {isAdding && (
-        <Card className="p-6 bg-blue-50 border-blue-100 animate-in slide-in-from-top-4">
+        <Card className="bg-white p-6 bg-blue-50 border-blue-100 animate-in slide-in-from-top-4">
           <h3 className="font-bold mb-4">Ajouter un client</h3>
           <form
             onSubmit={handleSubmit}
@@ -82,7 +82,7 @@ const ClientsView = () => {
         {clients.map((c: Client) => (
           <Card
             key={c.id}
-            className="dark:bg-slate-800 p-4 hover:shadow-md transition-shadow"
+            className="bg-white dark:bg-slate-800 p-4 hover:shadow-md transition-shadow"
           >
             <div className="flex items-start justify-between">
               <div>

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import notificationSliceReducer from "@/application/slices/notification/notificationSlice";
-import userSliceReducer from "@/application/slices/auth/userSlice";
+import userSliceReducer from "@/application/slices/user";
 import authSliceReducer from "@/application/slices/auth/authSlice";
 import clientSliceReducer from "@/application/slices/admin/client";
 import expenseSliceReducer from "@/application/slices/admin/expense";

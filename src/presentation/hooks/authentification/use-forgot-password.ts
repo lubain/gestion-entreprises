@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useToast } from "@/presentation/components/common/toast/Toast";
-import { resetPassword } from "@/application/slices/auth/authSlice";
+import { resetPassword } from "@/application/slices/auth/resetPassword";
 import { AppDispatch } from "@/store";
 
 interface UseForgotPasswordReturn {

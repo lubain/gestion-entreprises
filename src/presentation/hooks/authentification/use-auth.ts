@@ -1,5 +1,5 @@
-import { restoreData as restoreDataAction } from "@/application/slices/auth/authSlice";
-import { getRoleUserSelected as getRoleUserSelectedAction } from "@/application/slices/auth/userSlice";
+import { restoreData as restoreDataAction } from "@/application/slices/auth/restoreData";
+import { getRoleUserSelected as getRoleUserSelectedAction } from "@/application/slices/user/getRoleUserSelected";
 import { AppDispatch, RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -32,7 +32,7 @@ const StockView = () => {
       {/* Modal d'ajustement de stock */}
       {adjustmentData.product && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md p-6 animate-in zoom-in-95">
+          <Card className="bg-white w-full max-w-md p-6 animate-in zoom-in-95">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-bold text-lg">Ajuster le stock</h3>
               <button
@@ -109,7 +109,7 @@ const StockView = () => {
       )}
 
       {isAdding && (
-        <Card className="p-6 bg-blue-50 border-blue-100">
+        <Card className="bg-white p-6 bg-blue-50 border-blue-100">
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-4 gap-4"
