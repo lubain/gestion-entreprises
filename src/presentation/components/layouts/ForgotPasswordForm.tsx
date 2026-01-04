@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, ArrowLeft } from "lucide-react";
 import ScrollToTop from "../common/navigation/ScrollToTop";
-import { useForgotPassword } from "@/presentation/hooks/use-forgot-password";
+import { useForgotPassword } from "@/presentation/hooks/authentification/use-forgot-password";
 
 export default function ForgotPasswordForm() {
   const { email, setEmail, loading, isSubmitted, sendResetLink } =

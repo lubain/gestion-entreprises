@@ -2,7 +2,7 @@ import { AppProvider, Navigation } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import { appTheme } from "@/presentation/lib/layoutTheme";
-import { useNavigationHandler } from "@/presentation/hooks/use-navigation-handler";
+import { useNavigationHandler } from "@/presentation/hooks/authentification/use-navigation-handler";
 import { User } from "./User";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { fr } from "date-fns/locale";
 import LoadingSpinner from "../common/LoadingSpinner";
-import { useRestoreAuth } from "@/presentation/hooks/use-restore-auth";
+import { useRestoreAuth } from "@/presentation/hooks/authentification/use-restore-auth";
 import { LogOutModal } from "../common/modal/LogOutModal";
 
 export interface BaseLayoutProps {

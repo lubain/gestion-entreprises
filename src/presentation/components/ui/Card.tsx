@@ -6,7 +6,7 @@ export const Card = ({
   className?: string;
 }) => (
   <div
-    className={`bg-white dark:bg-transparent rounded-lg shadow-sm border border-slate-200 ${className}`}
+    className={`dark:bg-transparent rounded-lg shadow-sm border border-slate-200 ${className}`}
   >
     {children}
   </div>

@@ -3,8 +3,9 @@ import { Card } from "@/presentation/components/ui/Card";
 import { Button } from "@/presentation/components/ui/Button";
 import { Input } from "@/presentation/components/ui/Input";
 import { Client, Product } from "@/domain/models";
-import { useInvoiceState } from "@/presentation/hooks/use-invoice-state";
+import { useInvoiceState } from "@/presentation/hooks/invoice/use-invoice-state";
 import ListDataGrid from "@/presentation/components/common/listDataGrid/ListDataGrid";
+import { Select } from "@/presentation/components/ui/Select";
 
 const InvoicesView = () => {
   const {
@@ -52,47 +53,37 @@ const InvoicesView = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Formulaire Gauche */}
           <div className="lg:col-span-2 space-y-6">
-            <Card className="p-6">
+            <Card className="bg-white p-6">
               <h3 className="font-bold mb-4 text-slate-700">
                 1. Sélectionner le Client
               </h3>
-              <select
-                className="w-full p-3 border border-slate-300 rounded-md bg-white dark:bg-transparent"
+              <Select
+                placeholder="-- Choisir un client --"
                 value={selectedClient}
-                onChange={(e) => setSelectedClient(parseInt(e.target.value))}
-              >
-                <option value="">-- Choisir un client --</option>
-                {clients.map((c: Client) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
+                onChange={setSelectedClient}
+                options={clients.map((c: Client) => ({
+                  value: c.id,
+                  label: c.name,
+                }))}
+              />
             </Card>
 
-            <Card className="p-6">
+            <Card className="bg-white p-6">
               <h3 className="font-bold mb-4 text-slate-700">
                 2. Ajouter des produits (HT)
               </h3>
               <div className="flex gap-2 items-end">
                 <div className="flex-1">
-                  <label className="text-xs font-semibold text-slate-500 uppercase mb-1 block">
-                    Produit
-                  </label>
-                  <select
-                    className="w-full p-2.5 border border-slate-300 rounded-md bg-white dark:bg-transparent text-sm"
+                  <Select
+                    label="Produit"
+                    placeholder="-- Choisir --"
                     value={currentProduct}
-                    onChange={(e) =>
-                      setCurrentProduct(parseInt(e.target.value))
-                    }
-                  >
-                    <option value="">-- Choisir --</option>
-                    {products.map((p: Product) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name} ({p.price} €)
-                      </option>
-                    ))}
-                  </select>
+                    onChange={setCurrentProduct}
+                    options={products.map((p: Product) => ({
+                      value: p.id,
+                      label: `${p.name} (${p.price.toFixed(2)} €)`,
+                    }))}
+                  />
                 </div>
                 <div className="w-24">
                   <Input
@@ -202,18 +193,22 @@ const InvoicesView = () => {
                   </div>
                 </div>
                 {enableTax && (
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-3">
                     <span className="text-xs text-slate-300">Taux</span>
-                    <select
-                      value={taxRate}
-                      onChange={(e) => setTaxRate(Number(e.target.value))}
-                      className="bg-slate-600 text-white text-xs p-1 rounded border-none"
-                    >
-                      <option value={20}>20%</option>
-                      <option value={10}>10%</option>
-                      <option value={5.5}>5.5%</option>
-                      <option value={0}>0%</option>
-                    </select>
+                    <div className="w-32">
+                      <Select
+                        value={taxRate}
+                        onChange={(val) => setTaxRate(Number(val))}
+                        options={[
+                          { value: 20, label: "20%" },
+                          { value: 10, label: "10%" },
+                          { value: 5.5, label: "5.5%" },
+                          { value: 0, label: "0%" },
+                        ]}
+                        className="bg-slate-600 border-slate-500 text-white text-xs py-1"
+                        containerClassName="text-xs"
+                      />
+                    </div>
                   </div>
                 )}
               </div>

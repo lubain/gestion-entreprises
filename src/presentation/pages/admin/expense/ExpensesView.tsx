@@ -1,12 +1,10 @@
-import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import { Card } from "@/presentation/components/ui/Card";
 import { Button } from "@/presentation/components/ui/Button";
 import { Input } from "@/presentation/components/ui/Input";
-import { Badge } from "@/presentation/components/ui/Badge";
-import { Expense } from "@/domain/models";
-import { useExpenseState } from "@/presentation/hooks/use-expense-state";
+import { useExpenseState } from "@/presentation/hooks/expense/use-expense-state";
 import ListDataGrid from "@/presentation/components/common/listDataGrid/ListDataGrid";
+import { Select } from "@/presentation/components/ui/Select";
 
 const ExpensesView = () => {
   const { isAdding, newExp, expenses, setIsAdding, handleSubmit, setNewExp } =
@@ -29,7 +27,7 @@ const ExpensesView = () => {
       </div>
 
       {isAdding && (
-        <Card className="p-4 bg-red-50 border-red-100">
+        <Card className="bg-white p-4 bg-red-50 border-red-100">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col md:flex-row gap-4 items-end"
@@ -57,22 +55,18 @@ const ExpensesView = () => {
               required
             />
             <div className="w-full md:w-48">
-              <label className="text-xs font-semibold text-slate-500 dark:text-white uppercase mb-1 block">
-                Catégorie
-              </label>
-              <select
-                className="w-full p-2 border border-slate-300 rounded-md text-sm"
+              <Select
+                label="Catégorie"
                 value={newExp.category}
-                onChange={(e) =>
-                  setNewExp({ ...newExp, category: e.target.value })
-                }
-              >
-                <option>Achats Marchandises</option>
-                <option>Charges</option>
-                <option>Salaires</option>
-                <option>Impôts</option>
-                <option>Autre</option>
-              </select>
+                onChange={(val) => setNewExp({ ...newExp, category: val })}
+                options={[
+                  "Achats Marchandises",
+                  "Charges",
+                  "Salaires",
+                  "Impôts",
+                  "Autre",
+                ].map((c) => ({ value: c, label: c }))}
+              />
             </div>
             <Button type="submit" variant="danger">
               Enregistrer

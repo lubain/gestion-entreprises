@@ -4,9 +4,9 @@ import { Paper } from "@mui/material";
 import { localeText } from "@/shared/constants/localeText";
 import { twMerge } from "tailwind-merge";
 import { Expense, Invoice, Product } from "@/domain/models";
-import { FacturationColumns } from "./FacturationColumns";
-import { DepenseColumns } from "./DepenseColumns";
-import { StockColumns } from "./StockColumns";
+import { FacturationColumns } from "./columns/FacturationColumns";
+import { DepenseColumns } from "./columns/DepenseColumns";
+import { StockColumns } from "./columns/StockColumns";
 
 interface ListDataGridProps extends React.ComponentProps<"div"> {
   data: Invoice[] | Expense[] | Product[];
