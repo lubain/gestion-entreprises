@@ -1,10 +1,25 @@
-export const Button = ({
-  children,
+import { User, LucideProps } from "lucide-react";
+import React, { ComponentProps } from "react";
+import { twMerge } from "tailwind-merge";
+
+type ButtonProps = ComponentProps<"button"> & {
+  children: React.ReactNode;
+  icon?: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+  loading?: boolean;
+  variant?: "primary" | "secondary" | "danger" | "ghost";
+};
+
+export const Button: React.FC<ButtonProps> = ({
   onClick,
+  children,
+  loading,
   variant = "primary",
-  className = "",
+  className,
   icon: Icon,
-}: any) => {
+  ...props
+}) => {
   const baseStyle =
     "flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors text-sm";
   const variants = {
@@ -19,10 +34,20 @@ export const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`${baseStyle} ${variants[variant as keyof typeof variants]} ${className}`}
+      className={twMerge(
+        `${baseStyle} ${variants[variant as keyof typeof variants]}`,
+        className
+      )}
+      {...props}
     >
-      {Icon && <Icon size={16} />}
-      {children}
+      {loading ? (
+        <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
+      ) : (
+        <>
+          {Icon && <Icon size={16} />}
+          {children}
+        </>
+      )}
     </button>
   );
 };

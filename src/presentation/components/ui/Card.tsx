@@ -1,12 +1,21 @@
-export const Card = ({
-  children,
-  className = "",
-}: {
+import React, { ComponentProps } from "react";
+import { twMerge } from "tailwind-merge";
+
+type CardProps = ComponentProps<"div"> & {
   children: React.ReactNode;
-  className?: string;
+};
+
+export const Card: React.FC<CardProps> = ({
+  children,
+  className,
+  ...props
 }) => (
   <div
-    className={`dark:bg-transparent rounded-lg shadow-sm border border-slate-200 ${className}`}
+    className={twMerge(
+      "dark:bg-transparent rounded-lg shadow-sm border border-slate-200",
+      className
+    )}
+    {...props}
   >
     {children}
   </div>

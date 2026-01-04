@@ -1,5 +1,11 @@
-export const Input = (props: any) => {
-  // Fix: Handle NaN values gracefully to prevent React warnings
+import React, { ComponentProps } from "react";
+import { twMerge } from "tailwind-merge";
+
+type InputProps = ComponentProps<"input"> & {
+  label?: string;
+};
+
+export const Input: React.FC<InputProps> = ({ className, ...props }) => {
   const safeValue =
     props.value !== undefined && Number.isNaN(props.value) ? "" : props.value;
 
@@ -13,7 +19,10 @@ export const Input = (props: any) => {
       <input
         {...props}
         value={safeValue}
-        className={`w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${props.className}`}
+        className={twMerge(
+          "w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm",
+          className
+        )}
       />
     </div>
   );
